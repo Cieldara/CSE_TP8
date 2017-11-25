@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include "stdes.h"
+#include <stdio.h>
 
 int main (int argc, char **argv)
 {
@@ -22,7 +23,7 @@ int main (int argc, char **argv)
   /* Error, as expected: */
   fecriref (f1, "Num: '%e'\n");
 #endif
-  
+
   fermer (f1);
 
   {
@@ -30,10 +31,10 @@ int main (int argc, char **argv)
     int  d;
     char my_word[128];
     f2 = ouvrir (argv[2], 'L');
-    fliref (f2, "  test  %c end %s", &c, my_word);
-    ecriref ("Read '%c' and '%s' from %s\n", c, my_word, argv[2]);
+    /*fliref (f2, "  test  %c end %s", &c, my_word);
+    fecriref ("Read '%c' and '%s' from %s\n", c, my_word, argv[2]);
     fliref (f2, "end %d %s", &d, my_word);
-    ecriref ("Now read '%d' and '%s' from %s\n", d, my_word, argv[2]);
+    fecriref ("Now read '%d' and '%s' from %s\n", d, my_word, argv[2]);*/
 
     fermer (f2);
   }
