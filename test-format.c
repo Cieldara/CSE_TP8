@@ -27,14 +27,16 @@ int main (int argc, char **argv)
   fermer (f1);
 
   {
-    char c;
-    int  d;
-    char my_word[128];
+    char a,b,c;
+    int d, second, first, res;
+    char my_word[128], de[500], numero[500];
     f2 = ouvrir (argv[2], 'L');
     /*fliref (f2, "  test  %c end %s", &c, my_word);
-    fecriref ("Read '%c' and '%s' from %s\n", c, my_word, argv[2]);
+    ecriref ("Read '%c' and '%s' from %s\n", c, my_word, argv[2]);
     fliref (f2, "end %d %s", &d, my_word);
-    fecriref ("Now read '%d' and '%s' from %s\n", d, my_word, argv[2]);*/
+    ecriref ("Now read '%d' and '%s' from %s\n", d, my_word, argv[2]);*/
+    res = fliref(f2, "test %d %s lecture %s %d", &first, de, numero, &second);
+    printf("res='%d' first='%d', de='%s', numero='%s', second='%d'\n",res, first, de, numero, second);
 
     fermer (f2);
   }

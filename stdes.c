@@ -144,5 +144,58 @@ int fecriref (FICHIER *fp, char *format, ...){
 }
 
 int fliref (FICHIER *fp, char *format, ...){
-	return -1;
+	va_list list;
+	unsigned int i, j;
+	int nbElem;
+	int *tmpInt;
+	char *tmpString, buf[1], str[21];
+
+	va_start(list, format);
+	for (i=0, nbElem=0; format[i] && nbElem!=-1; i++){
+		if (format[i] == '%'){
+			switch (format[i+1]){
+				case 's':
+				tmpString = va_arg(list,char*);
+				j=0;
+				while(lire(buf, sizeof(char), 1, fp) != -1
+						&& buf[0] != ' ' && buf[0] != '\n'
+						&& buf[0] != '\0' && buf[0] != '\r')
+					tmpString[j++]=buf[0];
+				tmpString[j]='\0';
+				nbElem++;
+				i++;
+				break;
+				case 'c':
+				tmpString = (char*)va_arg(list,int*);
+				lire(tmpString, sizeof(char), 1, fp);
+				nbElem++;
+				break;
+				case 'd':
+				tmpInt = (int*)va_arg(list,int*);
+				j=0;
+				while(lire(buf, sizeof(char), 1, fp) != -1 && buf[0] > 47
+						&& buf[0] < 58 && sizeof(str) > j)
+							str[j++] = buf[0];
+				str[j]='\0';
+				*tmpInt = atoi(str);
+				nbElem++;
+				i++;
+				break;
+				case '%':
+				if (lire(buf, sizeof(char), 1, fp) == -1 || buf[0] != '%'){
+					nbElem=-1;
+				}
+				break;
+				default:
+				nbElem=-1;
+			}
+			i++;
+		} else {
+			if (lire(buf, sizeof(char), 1, fp) == -1 || buf[0] != format[i]){
+				nbElem =-1;
+			}
+		}
+	}
+	va_end(list);
+	return nbElem;;
 }
