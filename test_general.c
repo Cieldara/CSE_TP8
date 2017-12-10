@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 	fermer (f1);
 	fermer (f3);
 
-	printf("\n\n Etape 2 : afficher le contenu du deuxieme fichier en paramètre, là où nous avons effectué la copie\n\n");
+	printf("Etape 2 : afficher le contenu du deuxieme fichier en paramètre, là où nous avons effectué la copie\n\n");
 	printf("Resultat attendu : Bonjour, ceci est le test de l'étape 1 !\n");
 	printf("Resultat obtenu : ");
 
@@ -54,10 +54,6 @@ int main(int argc, char *argv[])
 	printf("\n");
 
 	fermer (f2);
-
-	printf("\n\n Etape 3: tests sur des formats\n\n");
-	printf("Resultat attendu : Bonjour, ceci est le test de l'étape 1 !\n");
-	printf("Resultat obtenu : ");
 	
 	return 0;
 }

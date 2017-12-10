@@ -46,6 +46,7 @@ int lire(void *p, unsigned int taille, unsigned int nbelem, FICHIER *f){
 	unsigned int has_to_read = 1;
 	unsigned int nb_octets = taille*nbelem;
 	unsigned int octets_lus = 0;
+	unsigned int index = 0;
 	while (has_to_read){
 		if (f->buffer_index == 0)
 			f->buffer_size = read(f->fd, f->buffer, MAXSIZE);
@@ -53,7 +54,8 @@ int lire(void *p, unsigned int taille, unsigned int nbelem, FICHIER *f){
 			nb_octets = f->buffer_size-f->buffer_index;
 		else
 			nb_octets = taille*nbelem - octets_lus;
-		memcpy(p, f->buffer+f->buffer_index, nb_octets);
+		memcpy(p+index, f->buffer+f->buffer_index, nb_octets);
+		index+=nb_octets;
 		f->buffer_index = f->buffer_index + nb_octets;
 		if (f->buffer_index >= f->buffer_size)
 			f->buffer_index = 0;

@@ -9,12 +9,12 @@ all: $(EXEC)
 exec:
 	touch input
 	touch resultat
-	./test test.c resultat
 	echo test 10 dix lecture vingt 20 > output
-	./test-format input output
 	echo "Bonjour, ceci est le test de l'étape 1 !" > input_test
 	touch resultat_etape1
 	./test_general input_test resultat_etape1
+	./test test.c resultat
+	./test-format input output
 
 test: test.o stdes.o
 	$(CC) -o test test.o stdes.o $(LDFLAGS)

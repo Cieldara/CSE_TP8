@@ -1,6 +1,6 @@
 #ifndef _STDES_H
 #define _STDES_H
-#define MAXSIZE 1000
+#define MAXSIZE 10
 
 /*
   struct _ES_FICHIER;
