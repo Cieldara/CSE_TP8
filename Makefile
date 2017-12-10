@@ -1,9 +1,17 @@
 CC=gcc
 CFLAGS=-W -Wall -ansi -pedantic
 LDFLAGS=
-EXEC=test test-format test-many-open test-rand
+EXEC=test test-format
+TEST_FILES=resultat input output
 
 all: $(EXEC)
+
+exec:
+	touch input
+	touch resultat
+	./test test.c resultat
+	echo test 10 dix lecture vingt 20 > output
+	./test-format input output
 
 test: test.o stdes.o
 	$(CC) -o test test.o stdes.o $(LDFLAGS)
@@ -24,4 +32,4 @@ stdes.o: stdes.c stdes.h
 	$(CC) -o stdes.o -c stdes.c $(CFLAGS)
 
 clean:
-	rm -rf *.o $(EXEC)
+	rm -rf *.o $(EXEC) $(TEST_FILES)
