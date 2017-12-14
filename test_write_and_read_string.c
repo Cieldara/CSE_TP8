@@ -27,9 +27,9 @@ int main(int argc, char *argv[])
 	
 	f2 = ouvrir (argv[1], 'R');
 	fliref(f2, "%s %s %s ",&c1,&c2,&c3);
-	printf("%s ",c1);
-	printf("%s ",c2);
-	printf("%s ",c3);
+	printf("%s\n",c1);
+	printf("%s\n",c2);
+	printf("%s\n",c3);
 	fermer (f2);
 	
 	return 0;
