@@ -7,14 +7,14 @@ int main(int argc, char *argv[])
 	FICHIER *f1;
 	FICHIER *f2;
 	FICHIER *f3;
-	char c,chaine[100];;
+	char c,chaine[100];
 
 	if (argc != 3){
-		printf("OK");
+		printf("2 arguments sont attendus : <nom_fichier1> <nom_fichier2>\nOn affiche le contenu du premier fichier passé en paramètre et on écrit son contenu sur le second");
 		exit(-1);
 	}
 
-	printf("/*************************/\n");
+	printf("\n\n/*************************/\n");
 	printf("Test généralisé : tout les comportements seront testés\n");
 	printf("/*************************/\n");
 

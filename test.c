@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 	char c;
 
 	if (argc != 3){
-		printf("OK");
+		
 		exit(-1);
 	}
 
@@ -27,6 +27,10 @@ int main(int argc, char *argv[])
 	printf("\n");
 	fermer (f1);
 	fermer (f2);
+
+	printf("\n\n/*************************/\n");
+	printf("Affichage (via cat) du fichier %s qui est la copie du fichier %s\n",argv[2],argv[1]);
+	printf("/*************************/\n\n");
 
 	return 0;
 }

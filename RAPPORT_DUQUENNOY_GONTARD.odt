@@ -1,0 +1,37 @@
+﻿DUQUENNOY Antoine
+GONTARD Benjamin
+Groupe de TD numéro 3
+Groupe de rendu Q
+
+COMPTE RENDU CSE : 
+Entrees-Sorties
+
+
+
+-COMPILATION DES PROGRAMMES:
+
+make pour compiler les fichiers.
+make exec pour lancer les tests.
+
+
+
+TESTS :
+
+Plusieurs fichiers de tests vous sont fournis : 
+
+-test.c :
+	Prends deux fichiers en paramètre : recopie le contenu du premier fichier dans le second.
+-test-format.c :
+	2 arguments sont attendus : <nom_fichier1> <nom_fichier2>
+	Dans nom_fichier1 sera écrit une chaîne de caractères formatée complexe et dans nom_fichier2, sera lue.
+	Cette chaîne est générée automatiquement par le Makefile, n'essayez pas de créer une chaîne de ce type, trop complexe.
+	
+-test_general.c :
+	2 arguments sont attendus : <nom_fichier1> <nom_fichier2>.
+	On affiche le contenu du premier fichier passé (par bloc de 1 octet en paramètre) et on écrit son contenu sur le second. Puis on affiche le contenu du second fichier (qui contient donc le contenu du premier fichier) par bloc de 100 octets (si vous faites make exec, c’est plus que la taille du fichier !).
+
+-test_write_and_read_int.c :
+	Prends un fichier en paramètre :On écrit dans le fichier des entiers de -11 à 100 puis on les lit dans ce même fichier.
+
+-test_write_and_read_string.c :
+	Prends un fichier en paramètre :On écrit dans le fichier trois chaînes de caractères («salut», «bonjour»,«aurevoir») puis on les lit dans ce même fichier.

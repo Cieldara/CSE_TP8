@@ -47,6 +47,7 @@ int lire(void *p, unsigned int taille, unsigned int nbelem, FICHIER *f){
 	unsigned int nb_octets = taille*nbelem;
 	unsigned int octets_lus = 0;
 	unsigned int index = 0;
+	
 	while (has_to_read){
 		if (f->buffer_index == 0)
 			f->buffer_size = read(f->fd, f->buffer, MAXSIZE);
@@ -54,7 +55,7 @@ int lire(void *p, unsigned int taille, unsigned int nbelem, FICHIER *f){
 			nb_octets = f->buffer_size-f->buffer_index;
 		else
 			nb_octets = taille*nbelem - octets_lus;
-		memcpy(p+index, f->buffer+f->buffer_index, nb_octets);
+		memcpy((char*)p+index, f->buffer+f->buffer_index, nb_octets);
 		index+=nb_octets;
 		f->buffer_index = f->buffer_index + nb_octets;
 		if (f->buffer_index >= f->buffer_size)
@@ -108,6 +109,8 @@ int fecriref (FICHIER *fp, char *format, ...){
 	va_list list;
 	int i, nbChar;
 	char *tmp, buf[1];
+	char str[9];
+	int nb;
 
 	va_start(list, format);
 	for (i=0, nbChar=0; format[i] && nbChar!=-1; i++){
@@ -115,7 +118,7 @@ int fecriref (FICHIER *fp, char *format, ...){
 			switch (format[i+1]){
 				case 's':
 				tmp = va_arg(list,char*);
-				ecrire(tmp, sizeof(char), sizeof(tmp)/sizeof(char), fp);
+				ecrire(tmp, sizeof(char), strlen(tmp), fp);
 				nbChar+=(sizeof(tmp)/sizeof(char));
 				break;
 				case 'c':
@@ -124,8 +127,10 @@ int fecriref (FICHIER *fp, char *format, ...){
 				nbChar++;
 				break;
 				case 'd':
-				tmp = itoa(va_arg(list,int));
-				ecrire(tmp, sizeof(char), sizeof(tmp)/sizeof(char), fp);
+				
+				nb = va_arg(list,int);
+				sprintf(str,"%d",nb);
+				ecrire(str, sizeof(char),strlen(str), fp);
 				nbChar+=(sizeof(tmp)/sizeof(char));
 				break;
 				case '%':
@@ -175,8 +180,9 @@ int fliref (FICHIER *fp, char *format, ...){
 				case 'd':
 				tmpInt = (int*)va_arg(list,int*);
 				j=0;
-				while(lire(buf, sizeof(char), 1, fp) != -1 && buf[0] > 47
-						&& buf[0] < 58 && sizeof(str) > j)
+
+				while((lire(buf, sizeof(char), 1, fp) != -1 && buf[0] > 47
+						&& buf[0] < 58 && sizeof(str) > j) || buf[0] == '-')
 							str[j++] = buf[0];
 				str[j]='\0';
 				*tmpInt = atoi(str);
